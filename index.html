@@ -1,737 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus Mart - Online Shopping</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flipkart - Big Billion Days Special Sale</title>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: #f1f2f4;
+      color: #212121;
+    }
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            fkBlue: '#2874f0',
-            fkYellow: '#ff9f00',
-            fkOrange: '#fb641b',
-            fkGreen: '#388e3c',
-            fkBg: '#f1f3f6'
-          },
-          fontFamily: {
-            roboto: ['Roboto', 'sans-serif'],
-          }
-        }
+    /* Top Flipkart Header */
+    header {
+      background-color: #2874f0;
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .logo-box {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .logo-title {
+      color: #fff;
+      font-weight: 800;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1;
+    }
+    .logo-sub {
+      color: #ffe500;
+      font-size: 11px;
+      font-weight: 600;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .search-bar {
+      flex: 1;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 13px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-header {
+      background-color: #fff;
+      color: #2874f0;
+      border: none;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s;
+    }
+    .btn-header:hover {
+      background-color: #f7f7f7;
+    }
+    .btn-admin {
+      background-color: #ffe11b;
+      color: #111;
+    }
+
+    /* Big Billion Days Urgent Banner */
+    .sale-banner {
+      background: linear-gradient(90deg, #b00020, #e53935);
+      color: #fff;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .sale-banner span.timer {
+      background: #000;
+      color: #ffe11b;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      font-family: monospace;
+      font-size: 15px;
+    }
+
+    /* Main Container */
+    .main-content {
+      max-width: 1200px;
+      margin: 15px auto;
+      padding: 0 10px;
+    }
+
+    /* Products Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
       }
     }
-  </script>
-  <style>
-    body { font-family: 'Roboto', sans-serif; background-color: #f1f3f6; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .product-card {
+      background: #fff;
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      border: 1px solid #eaeaea;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .product-img-box {
+      width: 100%;
+      height: 230px;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .product-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .product-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .product-name {
+      font-size: 13px;
+      color: #212121;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .sale-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: #212121;
+    }
+    .strike-price {
+      font-size: 12px;
+      color: #878787;
+      text-decoration: line-through;
+    }
+    .discount-tag {
+      font-size: 11px;
+      color: #388e3c;
+      font-weight: 700;
+    }
+    .bbd-assured-badge {
+      font-size: 10px;
+      color: #2874f0;
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    /* Modal Styling (Product Detailed View like Flipkart) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 10px;
+    }
+    .modal-box {
+      background: #fff;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      z-index: 10;
+    }
+    .modal-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+    }
+    @media(max-width: 768px) {
+      .modal-grid {
+        flex-direction: column;
+      }
+    }
+
+    /* Detail Image Slider */
+    .gallery-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    .main-view-box {
+      width: 100%;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .main-view-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #ccc;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .slide-left { left: 8px; }
+    .slide-right { right: 8px; }
+    
+    .thumbnail-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      width: 100%;
+      padding-bottom: 5px;
+    }
+    .thumb-item {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      cursor: pointer;
+      object-fit: cover;
+    }
+    .thumb-item.active {
+      border: 2px solid #2874f0;
+    }
+
+    /* Detail Specs */
+    .detail-info {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .detail-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #212121;
+    }
+    .rating-badge {
+      background-color: #388e3c;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      width: fit-content;
+    }
+    .price-box-detail {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 8px 0;
+    }
+    .price-box-detail .final-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #212121;
+    }
+    .price-box-detail .cut-price {
+      font-size: 15px;
+      color: #878787;
+      text-decoration: line-through;
+    }
+    .price-box-detail .off-txt {
+      font-size: 15px;
+      color: #388e3c;
+      font-weight: 700;
+    }
+    .size-select-box {
+      margin: 8px 0;
+    }
+    .size-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    .size-pills {
+      display: flex;
+      gap: 8px;
+    }
+    .size-pill {
+      border: 1px solid #d5d5d5;
+      padding: 6px 12px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .size-pill.active {
+      border-color: #2874f0;
+      color: #2874f0;
+      background-color: #f0f6ff;
+    }
+    .offers-list {
+      background: #fdfaf2;
+      border: 1px dashed #e1a63c;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #212121;
+    }
+    .offers-list p {
+      margin-bottom: 4px;
+    }
+    
+    /* Action Buttons (Flipkart Classic Yellow & Orange) */
+    .action-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .btn-cart {
+      flex: 1;
+      background: #ff9f00;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .btn-buy {
+      flex: 1;
+      background: #fb641b;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    /* Admin Upload Form Modal */
+    .upload-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2100;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+    .upload-card {
+      background: #fff;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 4px;
+      padding: 20px;
+      position: relative;
+    }
+    .form-group {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .form-group input {
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      border-radius: 3px;
+      font-size: 14px;
+      outline: none;
+    }
+    .btn-submit {
+      background: #2874f0;
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      background: #fff;
+      border-radius: 4px;
+      color: #777;
+    }
   </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-  <!-- TOP NAVBAR -->
-  <header class="bg-fkBlue sticky top-0 z-40 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-      
-      <!-- Logo -->
-      <div class="flex items-center gap-1 cursor-pointer" onclick="renderProducts()">
-        <span class="text-2xl font-bold italic tracking-wide text-white">Nexus<span class="text-yellow-300">Mart</span></span>
-        <span class="text-xs italic text-gray-200 mt-3 -ml-4 flex items-center gap-0.5">Plus <i class="fa-solid fa-star text-yellow-300 text-[10px]"></i></span>
+  <!-- Top Header -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo-box">
+        <span class="logo-title">Flipkart</span>
+        <span class="logo-sub">Explore <span style="color:#fff;">Plus</span> <i class="fa fa-plus" style="font-size:8px;"></i></span>
+      </a>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search for products, brands and more..." disabled />
+        <i class="fa fa-search" style="color:#2874f0;"></i>
       </div>
 
-      <!-- Search Bar -->
-      <div class="flex-1 max-w-2xl relative hidden md:block">
-        <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search for products, brands and more" 
-               class="w-full bg-white px-4 py-2 pr-10 rounded-sm text-sm focus:outline-none shadow-inner">
-        <button class="absolute right-3 top-2.5 text-fkBlue text-base"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </div>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-6 text-white font-medium text-sm">
-        <button onclick="openAdminModal()" class="bg-white text-fkBlue px-5 py-1 rounded-sm font-semibold hover:bg-gray-100 transition shadow-sm">
-          <i class="fa-solid fa-plus-circle mr-1"></i> Admin Panel
+      <div class="header-actions">
+        <!-- Share Website Button -->
+        <button class="btn-header" onclick="shareWebsite()" title="Share with customers">
+          <i class="fa fa-share-alt"></i> Share
         </button>
 
-        <div class="relative cursor-pointer flex items-center gap-1" onclick="openCartModal()">
-          <i class="fa-solid fa-cart-shopping text-lg"></i>
-          <span class="hidden sm:inline">Cart</span>
-          <span id="cartBadge" class="absolute -top-2 -right-3 bg-fkOrange text-white text-[11px] font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Search Bar -->
-    <div class="px-3 pb-2.5 md:hidden">
-      <div class="relative">
-        <input type="text" id="mobileSearchInput" onkeyup="searchProductsMobile()" placeholder="Search products..." 
-               class="w-full bg-white px-3 py-1.5 rounded-sm text-sm focus:outline-none">
-        <button class="absolute right-3 top-2 text-fkBlue"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <!-- Admin Upload Button (Visible only to Admin) -->
+        <button id="adminUploadBtn" class="btn-header btn-admin" style="display:none;" onclick="openUploadModal()">
+          <i class="fa fa-cloud-upload-alt"></i> Upload
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- CATEGORY STRIP -->
-  <div class="bg-white shadow-sm border-b overflow-x-auto hide-scrollbar">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between gap-6 min-w-max text-xs text-gray-700 font-medium text-center">
-      <div onclick="filterCategory('All')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-border-all text-xl text-gray-600"></i>
-        <span>All Products</span>
-      </div>
-      <div onclick="filterCategory('Mobiles')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-mobile-screen-button text-xl text-blue-500"></i>
-        <span>Mobiles</span>
-      </div>
-      <div onclick="filterCategory('Electronics')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-laptop text-xl text-indigo-500"></i>
-        <span>Electronics</span>
-      </div>
-      <div onclick="filterCategory('Fashion')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-shirt text-xl text-pink-500"></i>
-        <span>Fashion</span>
-      </div>
-      <div onclick="filterCategory('Appliances')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-tv text-xl text-purple-500"></i>
-        <span>Appliances</span>
-      </div>
-      <div onclick="filterCategory('Home')" class="cursor-pointer hover:text-fkBlue flex flex-col items-center gap-1">
-        <i class="fa-solid fa-couch text-xl text-amber-600"></i>
-        <span>Home & Furniture</span>
-      </div>
-    </div>
+  <!-- Big Billion Days Urgency Bar -->
+  <div class="sale-banner">
+    <div>⚡ BIG BILLION DAYS CRAZY DEAL ENDS IN:</div>
+    <span class="timer" id="countdown">15:00</span>
   </div>
 
-  <!-- BANNER PROMO -->
-  <div class="max-w-7xl mx-auto px-2 md:px-4 mt-3">
-    <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-500 text-white p-5 md:p-8 rounded shadow flex flex-col md:flex-row justify-between items-center">
-      <div>
-        <span class="bg-yellow-400 text-gray-900 text-xs uppercase px-2 py-0.5 rounded font-bold">Mega Sale Live</span>
-        <h1 class="text-2xl md:text-4xl font-extrabold mt-1">Super Value Deals & Discounts</h1>
-        <p class="text-blue-100 text-xs md:text-sm mt-1">100% Genuine Products • Fast Secure Online Payments • Free Delivery</p>
-      </div>
-      <div class="mt-4 md:mt-0 bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20 text-center">
-        <span class="text-xs uppercase font-semibold">Special Offer</span>
-        <p class="text-lg font-bold text-yellow-300">UP TO 70% OFF</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN PRODUCT SECTION -->
-  <main class="max-w-7xl mx-auto px-2 md:px-4 py-4">
-    <div class="bg-white p-4 rounded shadow-sm mb-3 flex items-center justify-between">
-      <h2 id="sectionTitle" class="text-lg md:text-xl font-bold text-gray-800">Featured Products</h2>
-      <span class="text-xs text-gray-500 font-medium" id="productCount">Showing all items</span>
-    </div>
-
-    <!-- Product Grid -->
-    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-      <!-- Products render dynamically via JS -->
+  <!-- Product Grid Container -->
+  <main class="main-content">
+    <div id="productGrid" class="product-grid"></div>
+    <div id="emptyNotice" class="empty-state" style="display:none;">
+      <h3>Koi product upload nahi kiya gaya hai abhi tak.</h3>
+      <p>Admin link se open karke products upload karein!</p>
     </div>
   </main>
 
-  <!-- FLIPKART STYLE BUY NOW MODAL -->
-  <div id="buyNowModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-2 backdrop-blur-sm">
-    <div class="bg-white w-full max-w-2xl rounded-sm shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
-      <!-- Modal Header -->
-      <div class="bg-fkBlue px-5 py-3 text-white flex justify-between items-center">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-shield-halved text-yellow-300 text-lg"></i>
-          <h3 class="font-bold text-base tracking-wide uppercase">NexusMart Secure Checkout</h3>
-        </div>
-        <button onclick="closeBuyModal()" class="text-white hover:text-gray-200 text-xl font-bold">&times;</button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="p-4 md:p-6 overflow-y-auto space-y-5 text-sm">
-        
-        <!-- Step 1: Delivery Address -->
-        <div class="border rounded p-3 bg-gray-50/70">
-          <div class="flex items-center justify-between mb-2">
-            <h4 class="font-bold text-gray-700 flex items-center gap-2">
-              <span class="bg-fkBlue text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">1</span>
-              DELIVERY ADDRESS
-            </h4>
+  <!-- Product Detail Modal (Flipkart View) -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+      <div class="modal-grid">
+        <!-- Gallery -->
+        <div class="gallery-wrapper">
+          <div class="main-view-box">
+            <button class="slide-arrow slide-left" onclick="slidePrev()"><i class="fa fa-chevron-left"></i></button>
+            <img id="detailMainImg" src="" alt="Cloth Preview" />
+            <button class="slide-arrow slide-right" onclick="slideNext()"><i class="fa fa-chevron-right"></i></button>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <input type="text" id="custName" placeholder="Full Name *" value="Rahul Sharma" class="border p-2 rounded text-xs focus:border-fkBlue outline-none">
-            <input type="tel" id="custPhone" placeholder="10-digit Mobile Number *" value="9876543210" class="border p-2 rounded text-xs focus:border-fkBlue outline-none">
-            <input type="text" id="custPin" placeholder="Pincode *" value="110001" class="border p-2 rounded text-xs focus:border-fkBlue outline-none">
-            <input type="text" id="custCity" placeholder="City / District *" value="New Delhi" class="border p-2 rounded text-xs focus:border-fkBlue outline-none">
-            <input type="text" id="custAddress" placeholder="Flat, House no., Building, Street *" value="House No 24, Green Park Extension" class="border p-2 rounded text-xs md:col-span-2 focus:border-fkBlue outline-none">
-          </div>
+          <div class="thumbnail-row" id="thumbContainer"></div>
         </div>
 
-        <!-- Step 2: Order Summary -->
-        <div class="border rounded p-3">
-          <h4 class="font-bold text-gray-700 flex items-center gap-2 mb-3">
-            <span class="bg-fkBlue text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">2</span>
-            ORDER SUMMARY
-          </h4>
-          <div id="buyItemDetails" class="flex gap-4 items-center border-b pb-3">
-            <!-- Dynamic Item Info -->
+        <!-- Details -->
+        <div class="detail-info">
+          <span class="bbd-assured-badge">⭐ Flipkart Assured Special Deal</span>
+          <h2 class="detail-title" id="detailTitle">Men Classic Cotton Fit Casual Wear</h2>
+          
+          <div>
+            <span class="rating-badge">4.3 <i class="fa fa-star" style="font-size:10px;"></i></span>
+            <span style="font-size:12px; color:#878787; margin-left: 6px;">(1,240 Ratings & 382 Reviews)</span>
           </div>
 
-          <!-- Price Breakup -->
-          <div class="pt-3 space-y-1.5 text-xs text-gray-600">
-            <div class="flex justify-between">
-              <span>Price (1 item)</span>
-              <span id="buyOriginalPrice" class="line-through">₹0</span>
-            </div>
-            <div class="flex justify-between text-fkGreen">
-              <span>Discount</span>
-              <span id="buyDiscountAmount">- ₹0</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Delivery Charges</span>
-              <span class="text-fkGreen font-semibold">FREE</span>
-            </div>
-            <div class="border-t pt-2 flex justify-between font-bold text-base text-gray-900">
-              <span>Total Payable</span>
-              <span id="buyTotalAmount" class="text-gray-900">₹0</span>
+          <div class="price-box-detail">
+            <span class="final-price" id="detailPrice">₹199</span>
+            <span class="cut-price" id="detailCutPrice">₹1,499</span>
+            <span class="off-txt">86% off</span>
+          </div>
+
+          <!-- Sizes -->
+          <div class="size-select-box">
+            <div class="size-label">Select Size</div>
+            <div class="size-pills">
+              <div class="size-pill active">S</div>
+              <div class="size-pill">M</div>
+              <div class="size-pill">L</div>
+              <div class="size-pill">XL</div>
             </div>
           </div>
-        </div>
 
-        <!-- Step 3: Payment Options (No COD) -->
-        <div class="border rounded p-3 bg-white">
-          <h4 class="font-bold text-gray-700 flex items-center gap-2 mb-2">
-            <span class="bg-fkBlue text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">3</span>
-            PAYMENT OPTIONS <span class="text-[11px] text-red-500 font-normal">(Prepaid Only)</span>
-          </h4>
+          <!-- Offers -->
+          <div class="offers-list">
+            <p><strong>Available Offers:</strong></p>
+            <p>🏷️ Bank Offer: 5% Unlimited Cashback on Flipkart Axis Bank Card</p>
+            <p>🏷️ Special Price: Extra ₹1,300 off (Special Big Billion Deal)</p>
+          </div>
 
-          <div class="space-y-2 mt-2">
-            <!-- UPI -->
-            <label class="flex items-center justify-between p-2.5 border rounded cursor-pointer hover:bg-blue-50 transition border-blue-200 bg-blue-50/40">
-              <div class="flex items-center gap-2.5">
-                <input type="radio" name="paymentMethod" value="UPI" checked class="accent-fkBlue text-fkBlue">
-                <div>
-                  <p class="font-semibold text-xs text-gray-800">UPI (Google Pay, PhonePe, Paytm)</p>
-                  <p class="text-[10px] text-gray-500">Pay directly from your UPI app instantly</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-qrcode text-fkBlue text-base"></i>
-            </label>
-
-            <!-- Cards -->
-            <label class="flex items-center justify-between p-2.5 border rounded cursor-pointer hover:bg-blue-50 transition">
-              <div class="flex items-center gap-2.5">
-                <input type="radio" name="paymentMethod" value="Cards" class="accent-fkBlue text-fkBlue">
-                <div>
-                  <p class="font-semibold text-xs text-gray-800">Credit / Debit / ATM Card</p>
-                  <p class="text-[10px] text-gray-500">Visa, MasterCard, Rupay & Maestro accepted</p>
-                </div>
-              </div>
-              <i class="fa-regular fa-credit-card text-gray-500 text-base"></i>
-            </label>
-
-            <!-- Netbanking -->
-            <label class="flex items-center justify-between p-2.5 border rounded cursor-pointer hover:bg-blue-50 transition">
-              <div class="flex items-center gap-2.5">
-                <input type="radio" name="paymentMethod" value="NetBanking" class="accent-fkBlue text-fkBlue">
-                <div>
-                  <p class="font-semibold text-xs text-gray-800">Net Banking</p>
-                  <p class="text-[10px] text-gray-500">All major Indian banks supported</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-building-columns text-gray-500 text-base"></i>
-            </label>
-
-            <!-- Disabled COD with Notice -->
-            <div class="p-2.5 border border-dashed rounded bg-gray-50 text-gray-400 flex items-center justify-between opacity-70">
-              <div class="flex items-center gap-2.5">
-                <input type="radio" disabled class="cursor-not-allowed">
-                <div>
-                  <span class="font-semibold text-xs line-through text-gray-400">Cash on Delivery (COD)</span>
-                  <span class="ml-2 text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-medium">Temporarily Unavailable</span>
-                  <p class="text-[10px] text-gray-400">COD is disabled to guarantee fast express shipment.</p>
-                </div>
-              </div>
-              <i class="fa-solid fa-ban text-red-400"></i>
-            </div>
+          <!-- Action Buttons -->
+          <div class="action-btns">
+            <button class="btn-cart" onclick="alert('Product Cart mein add ho gaya!')"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
+            <button class="btn-buy" onclick="alert('Order successfully placed at Big Billion Price!')"><i class="fa fa-bolt"></i> BUY NOW</button>
           </div>
         </div>
-
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="border-t p-3 bg-gray-50 flex items-center justify-between">
-        <div>
-          <span class="text-xs text-gray-500">Amount to pay:</span>
-          <div class="text-lg font-extrabold text-gray-900" id="footerTotal">₹0</div>
-        </div>
-        <button onclick="confirmOrder()" class="bg-fkOrange hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded shadow uppercase text-sm tracking-wide transition flex items-center gap-2">
-          <i class="fa-solid fa-lock text-xs"></i> Pay & Place Order
-        </button>
       </div>
     </div>
   </div>
 
-  <!-- ORDER SUCCESS MODAL -->
-  <div id="orderSuccessModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-2xl animate-bounce-short">
-      <div class="w-16 h-16 bg-green-100 text-fkGreen rounded-full flex items-center justify-center mx-auto text-3xl mb-3">
-        <i class="fa-solid fa-circle-check"></i>
+  <!-- Admin Upload Form Modal -->
+  <div class="upload-modal" id="uploadModal">
+    <div class="upload-card">
+      <button class="modal-close-btn" onclick="closeUploadModal()">&times;</button>
+      <h3 style="margin-bottom: 15px; color:#2874f0;">Upload Cloth Item</h3>
+      
+      <div class="form-group">
+        <label>Cloth Name / Title</label>
+        <input type="text" id="clothTitle" placeholder="e.g. Trendy Cotton Shirt" />
       </div>
-      <h3 class="text-xl font-bold text-gray-900">Order Placed Successfully!</h3>
-      <p class="text-xs text-gray-500 mt-1">Thank you for your prepaid payment. Your package will be delivered in 2-3 business days.</p>
-      <div class="mt-4 p-3 bg-gray-50 rounded text-left text-xs space-y-1">
-        <p><strong class="text-gray-700">Order ID:</strong> <span id="successOrderId" class="text-fkBlue font-mono"></span></p>
-        <p><strong class="text-gray-700">Payment Status:</strong> <span class="text-fkGreen font-bold">Confirmed (Online)</span></p>
+
+      <div class="form-group">
+        <label>Sale Price (₹)</label>
+        <input type="text" id="clothPrice" value="199" placeholder="e.g. 199" />
       </div>
-      <button onclick="closeSuccessModal()" class="w-full mt-4 bg-fkBlue hover:bg-blue-600 text-white font-semibold py-2 rounded text-sm transition">
-        Continue Shopping
-      </button>
+
+      <div class="form-group">
+        <label>Select Multiple Photos (Slide view ke liye)</label>
+        <input type="file" id="clothImages" multiple accept="image/*" />
+        <small style="color:#666;">Aap ek sath 2 ya zyada photos choose kar sakte hain.</small>
+      </div>
+
+      <button class="btn-submit" onclick="saveProduct()">Save & Publish</button>
     </div>
   </div>
 
-  <!-- CART MODAL -->
-  <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3">
-    <div class="bg-white w-full max-w-lg rounded-sm shadow-xl flex flex-col max-h-[85vh]">
-      <div class="bg-fkBlue text-white p-3 flex justify-between items-center font-bold">
-        <span><i class="fa-solid fa-cart-shopping mr-2"></i> My Shopping Cart</span>
-        <button onclick="closeCartModal()" class="text-xl">&times;</button>
-      </div>
-      <div id="cartItemsList" class="p-4 overflow-y-auto divide-y space-y-3 flex-1 text-sm">
-        <!-- Dynamic Cart Items -->
-      </div>
-      <div class="border-t p-3 bg-gray-50 flex items-center justify-between">
-        <span class="font-bold text-gray-800">Total: <span id="cartTotalAmt" class="text-fkBlue">₹0</span></span>
-        <button onclick="checkoutCart()" class="bg-fkOrange text-white px-5 py-2 rounded font-bold uppercase text-xs">
-          Checkout All
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADMIN PANEL MODAL (WITH DESCRIPTION & AUTO RATINGS) -->
-  <div id="adminModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3 backdrop-blur-sm">
-    <div class="bg-white w-full max-w-lg rounded-md shadow-2xl overflow-hidden">
-      <div class="bg-gray-800 text-white px-4 py-3 flex justify-between items-center">
-        <h3 class="font-bold text-sm tracking-wider uppercase"><i class="fa-solid fa-boxes-packing text-yellow-400 mr-2"></i> Admin - Add New Product</h3>
-        <button onclick="closeAdminModal()" class="text-white hover:text-gray-300 text-xl font-bold">&times;</button>
-      </div>
-
-      <form id="adminProductForm" onsubmit="handleProductUpload(event)" class="p-4 space-y-3 text-xs">
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Product Title *</label>
-          <input type="text" id="admTitle" required placeholder="e.g. OnePlus Nord CE 3 5G (Aqua Surge, 128 GB)" class="w-full border p-2 rounded focus:border-fkBlue outline-none">
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Category *</label>
-            <select id="admCategory" class="w-full border p-2 rounded focus:border-fkBlue outline-none bg-white">
-              <option value="Mobiles">Mobiles</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Appliances">Appliances</option>
-              <option value="Home">Home & Furniture</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Image URL</label>
-            <input type="url" id="admImage" placeholder="Leave empty for auto-placeholder" class="w-full border p-2 rounded focus:border-fkBlue outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Original MRP (₹) *</label>
-            <input type="number" id="admMrp" required placeholder="24999" class="w-full border p-2 rounded focus:border-fkBlue outline-none">
-          </div>
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Selling Price (₹) *</label>
-            <input type="number" id="admPrice" required placeholder="18999" class="w-full border p-2 rounded focus:border-fkBlue outline-none">
-          </div>
-        </div>
-
-        <!-- NEW: DESCRIPTION FIELD -->
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Product Description *</label>
-          <textarea id="admDesc" required rows="3" placeholder="Enter product specifications, features, warranty details..." class="w-full border p-2 rounded focus:border-fkBlue outline-none"></textarea>
-        </div>
-
-        <!-- AUTO RATING NOTICE -->
-        <div class="p-2.5 bg-yellow-50 border border-yellow-200 rounded text-yellow-800 text-[11px] flex items-center gap-2">
-          <i class="fa-solid fa-wand-magic-sparkles text-amber-500 text-sm"></i>
-          <span><strong>Auto Rating System:</strong> System will automatically generate realistic ratings (3.9★ - 4.8★) and reviews (1.2k - 8.5k) for this product!</span>
-        </div>
-
-        <div class="pt-2 flex justify-end gap-2">
-          <button type="button" onclick="closeAdminModal()" class="px-4 py-2 border rounded font-medium text-gray-600 hover:bg-gray-100">Cancel</button>
-          <button type="submit" class="px-5 py-2 bg-fkBlue hover:bg-blue-700 text-white font-bold rounded shadow transition">
-            Publish Product
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- JavaScript Logic -->
   <script>
-    // Initial Stock Products
-    const defaultProducts = [
-      {
-        id: 1,
-        title: "Apple iPhone 15 (Blue, 128 GB)",
-        category: "Mobiles",
-        mrp: 79900,
-        price: 65999,
-        image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60",
-        description: "Dynamic Island, 48MP Main camera with 2x Telephoto, all-day battery life, and A16 Bionic chip.",
-        rating: 4.6,
-        reviewsCount: "6.4k"
-      },
-      {
-        id: 2,
-        title: "Sony WH-1000XM4 Noise Cancelling Headphones",
-        category: "Electronics",
-        mrp: 29990,
-        price: 19990,
-        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60",
-        description: "Industry-leading active noise cancellation with Dual Noise Sensor technology and 30-hour battery life.",
-        rating: 4.5,
-        reviewsCount: "4.1k"
-      },
-      {
-        id: 3,
-        title: "Nike Air Jordan High Retro Sneakers",
-        category: "Fashion",
-        mrp: 14995,
-        price: 9499,
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60",
-        description: "Iconic streetwear basketball shoes, premium full-grain leather build with responsive Air-Sole cushioning.",
-        rating: 4.3,
-        reviewsCount: "2.8k"
-      },
-      {
-        id: 4,
-        title: "Samsung 55-inch Crystal 4K Ultra HD Smart TV",
-        category: "Appliances",
-        mrp: 64900,
-        price: 43990,
-        image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&auto=format&fit=crop&q=60",
-        description: "PurColor crystal display, HDR10+, Smart Hub integration, and Q-Symphony soundbar synchronization.",
-        rating: 4.4,
-        reviewsCount: "3.2k"
+    // 1. Check Admin State via URL Parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.get('admin') === 'true';
+
+    if (isAdmin) {
+      document.getElementById('adminUploadBtn').style.display = 'flex';
+    }
+
+    // 2. Share Functionality (Customer link will NOT have ?admin=true)
+    function shareWebsite() {
+      const baseUrl = window.location.origin + window.location.pathname;
+      navigator.clipboard.writeText(baseUrl).then(() => {
+        alert("Website link copy ho gayi hai! Is link mein upload button kisi ko nahi dikhega:\n" + baseUrl);
+      }).catch(() => {
+        prompt("Copy this customer link:", baseUrl);
+      });
+    }
+
+    // 3. Countdown Timer (15 Minutes Real-time)
+    let totalSeconds = 15 * 60;
+    const countdownEl = document.getElementById('countdown');
+
+    const timerInterval = setInterval(() => {
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+
+      countdownEl.innerText = `${minutes}:${seconds}`;
+
+      if (totalSeconds <= 0) {
+        clearInterval(timerInterval);
+        countdownEl.innerText = "00:00";
+      } else {
+        totalSeconds--;
       }
-    ];
+    }, 1000);
 
-    // Initialize LocalStorage
-    let products = JSON.parse(localStorage.getItem('nexus_products')) || defaultProducts;
-    let cart = JSON.parse(localStorage.getItem('nexus_cart')) || [];
-    let currentBuyItem = null;
+    // 4. Products Management using LocalStorage
+    let products = JSON.parse(localStorage.getItem('bbd_products') || '[]');
 
-    function saveProducts() {
-      localStorage.setItem('nexus_products', JSON.stringify(products));
-    }
-
-    function saveCart() {
-      localStorage.setItem('nexus_cart', JSON.stringify(cart));
-      updateCartBadge();
-    }
-
-    function updateCartBadge() {
-      const badge = document.getElementById('cartBadge');
-      const count = cart.reduce((total, item) => total + item.qty, 0);
-      badge.innerText = count;
-    }
-
-    // GENERATE FAKE RATINGS HELPER
-    function generateFakeRating() {
-      // Rating between 3.9 and 4.8
-      const ratingsPool = [3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8];
-      const randomRating = ratingsPool[Math.floor(Math.random() * ratingsPool.length)];
-      
-      // Review count between 1.1k and 9.5k
-      const randomReviews = (Math.random() * (8.5 - 1.2) + 1.2).toFixed(1) + "k";
-      
-      return { rating: randomRating, reviewsCount: randomReviews };
-    }
-
-    // RENDER PRODUCTS
-    function renderProducts(itemsToRender = products) {
+    function renderProducts() {
       const grid = document.getElementById('productGrid');
-      const countLabel = document.getElementById('productCount');
+      const emptyNotice = document.getElementById('emptyNotice');
       grid.innerHTML = '';
 
-      countLabel.innerText = `${itemsToRender.length} products available`;
-
-      if (itemsToRender.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500 font-medium">No products found in this category.</div>`;
+      if (products.length === 0) {
+        emptyNotice.style.display = 'block';
         return;
       }
+      emptyNotice.style.display = 'none';
 
-      itemsToRender.forEach(p => {
-        const discountPercent = Math.round(((p.mrp - p.price) / p.mrp) * 100);
-
+      products.forEach((p, index) => {
+        const coverImg = p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/300x400?text=No+Image';
         const card = document.createElement('div');
-        card.className = "bg-white border rounded hover:shadow-lg transition-all flex flex-col justify-between p-3 group";
+        card.className = 'product-card';
+        card.onclick = () => openProductModal(index);
 
         card.innerHTML = `
-          <div>
-            <!-- Image Area -->
-            <div class="h-44 md:h-48 w-full overflow-hidden rounded bg-gray-50 flex items-center justify-center relative mb-2">
-              <img src="${p.image}" alt="${p.title}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
-              <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">${discountPercent}% OFF</span>
-            </div>
-
-            <!-- Category & Title -->
-            <span class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider">${p.category}</span>
-            <h3 class="font-medium text-xs md:text-sm text-gray-900 line-clamp-1 mt-0.5" title="${p.title}">${p.title}</h3>
-            
-            <!-- Description -->
-            <p class="text-[11px] text-gray-500 line-clamp-2 mt-1" title="${p.description || ''}">${p.description || 'Top quality certified product from official manufacturer.'}</p>
-
-            <!-- Rating Strip (Flipkart Green Badge) -->
-            <div class="flex items-center gap-1.5 mt-2">
-              <span class="bg-fkGreen text-white text-[11px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                ${p.rating} <i class="fa-solid fa-star text-[9px]"></i>
-              </span>
-              <span class="text-[11px] text-gray-400 font-medium">(${p.reviewsCount} Ratings)</span>
-            </div>
-
-            <!-- Price -->
-            <div class="mt-2.5 flex items-baseline gap-2">
-              <span class="text-base md:text-lg font-bold text-gray-900">₹${p.price.toLocaleString('en-IN')}</span>
-              <span class="text-xs text-gray-400 line-through">₹${p.mrp.toLocaleString('en-IN')}</span>
-            </div>
-            <p class="text-[10px] text-fkGreen font-semibold">Free delivery</p>
+          <div class="product-img-box">
+            <img src="${coverImg}" alt="${p.title}" />
           </div>
-
-          <!-- Buttons: Add to Cart & Buy Now -->
-          <div class="grid grid-cols-2 gap-2 mt-3 pt-2 border-t">
-            <button onclick="addToCart(${p.id})" class="bg-fkYellow hover:bg-amber-500 text-white font-bold py-1.5 px-2 rounded-sm text-xs flex items-center justify-center gap-1 transition shadow-sm">
-              <i class="fa-solid fa-cart-shopping text-xs"></i> Add
-            </button>
-            <button onclick="openBuyModal(${p.id})" class="bg-fkOrange hover:bg-orange-600 text-white font-bold py-1.5 px-2 rounded-sm text-xs flex items-center justify-center gap-1 transition shadow-sm">
-              <i class="fa-solid fa-bolt text-xs"></i> Buy Now
-            </button>
+          <div class="product-info">
+            <span class="product-name">${p.title}</span>
+            <div class="price-row">
+              <span class="sale-price">₹${p.price}</span>
+              <span class="strike-price">₹1,499</span>
+              <span class="discount-tag">86% off</span>
+            </div>
+            <span class="bbd-assured-badge">Flipkart Assured</span>
           </div>
         `;
-
         grid.appendChild(card);
       });
     }
 
-    // FILTER & SEARCH
-    function filterCategory(cat) {
-      document.getElementById('sectionTitle').innerText = cat === 'All' ? 'Featured Products' : `${cat} Collection`;
-      if (cat === 'All') {
-        renderProducts(products);
-      } else {
-        const filtered = products.filter(p => p.category.toLowerCase() === cat.toLowerCase());
-        renderProducts(filtered);
-      }
+    // 5. Upload Modal Actions
+    function openUploadModal() {
+      document.getElementById('uploadModal').style.display = 'flex';
+    }
+    function closeUploadModal() {
+      document.getElementById('uploadModal').style.display = 'none';
     }
 
-    function searchProducts() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = products.filter(p => p.title.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)));
-      renderProducts(filtered);
-    }
+    function saveProduct() {
+      const title = document.getElementById('clothTitle').value.trim();
+      const price = document.getElementById('clothPrice').value.trim() || '199';
+      const fileInput = document.getElementById('clothImages');
 
-    function searchProductsMobile() {
-      const q = document.getElementById('mobileSearchInput').value.toLowerCase();
-      const filtered = products.filter(p => p.title.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)));
-      renderProducts(filtered);
-    }
-
-    // BUY NOW FLIPKART STYLE WORKFLOW
-    function openBuyModal(productId) {
-      const item = products.find(p => p.id === productId);
-      if (!item) return;
-      currentBuyItem = item;
-
-      // Fill Item Details
-      document.getElementById('buyItemDetails').innerHTML = `
-        <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded border">
-        <div class="flex-1">
-          <h5 class="font-bold text-xs md:text-sm text-gray-800 line-clamp-1">${item.title}</h5>
-          <p class="text-[11px] text-gray-500 mt-0.5">Category: ${item.category} • Seller: RetailNet</p>
-          <div class="flex items-center gap-2 mt-1">
-            <span class="font-bold text-sm text-gray-900">₹${item.price.toLocaleString('en-IN')}</span>
-            <span class="text-xs text-gray-400 line-through">₹${item.mrp.toLocaleString('en-IN')}</span>
-          </div>
-        </div>
-      `;
-
-      // Fill Pricing
-      const discount = item.mrp - item.price;
-      document.getElementById('buyOriginalPrice').innerText = `₹${item.mrp.toLocaleString('en-IN')}`;
-      document.getElementById('buyDiscountAmount').innerText = `- ₹${discount.toLocaleString('en-IN')}`;
-      document.getElementById('buyTotalAmount').innerText = `₹${item.price.toLocaleString('en-IN')}`;
-      document.getElementById('footerTotal').innerText = `₹${item.price.toLocaleString('en-IN')}`;
-
-      document.getElementById('buyNowModal').classList.remove('hidden');
-    }
-
-    function closeBuyModal() {
-      document.getElementById('buyNowModal').classList.add('hidden');
-      currentBuyItem = null;
-    }
-
-    // CONFIRM ORDER
-    function confirmOrder() {
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const address = document.getElementById('custAddress').value.trim();
-
-      if (!name || !phone || !address) {
-        alert("Please complete the delivery address details first.");
+      if (!title) {
+        alert("Please cloth ka title daaliye!");
         return;
       }
 
-      // Close Checkout & Show Confirmation
-      closeBuyModal();
-      const randomOrderId = 'OD' + Math.floor(100000000000 + Math.random() * 900000000000);
-      document.getElementById('successOrderId').innerText = randomOrderId;
-      document.getElementById('orderSuccessModal').classList.remove('hidden');
-    }
-
-    function closeSuccessModal() {
-      document.getElementById('orderSuccessModal').classList.add('hidden');
-    }
-
-    // CART OPERATIONS
-    function addToCart(productId) {
-      const prod = products.find(p => p.id === productId);
-      if (!prod) return;
-
-      const existing = cart.find(i => i.id === productId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ ...prod, qty: 1 });
+      if (fileInput.files.length === 0) {
+        alert("Kam se kam ek photo select karein!");
+        return;
       }
-      saveCart();
 
-      // Quick toast
-      alert(`"${prod.title}" added to your Cart!`);
-    }
-
-    function openCartModal() {
-      const list = document.getElementById('cartItemsList');
-      list.innerHTML = '';
-
-      if (cart.length === 0) {
-        list.innerHTML = `<div class="py-12 text-center text-gray-400">Your cart is currently empty!</div>`;
-        document.getElementById('cartTotalAmt').innerText = '₹0';
-      } else {
-        let total = 0;
-        cart.forEach((item, index) => {
-          total += item.price * item.qty;
-          const row = document.createElement('div');
-          row.className = "flex items-center justify-between py-2";
-          row.innerHTML = `
-            <div class="flex items-center gap-3">
-              <img src="${item.image}" class="w-12 h-12 object-cover rounded border">
-              <div>
-                <p class="font-bold text-xs text-gray-800 line-clamp-1">${item.title}</p>
-                <p class="text-xs text-gray-500 font-semibold">₹${item.price.toLocaleString('en-IN')} × ${item.qty}</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <button onclick="changeQty(${index}, -1)" class="w-6 h-6 border rounded font-bold">-</button>
-              <span class="text-xs font-bold">${item.qty}</span>
-              <button onclick="changeQty(${index}, 1)" class="w-6 h-6 border rounded font-bold">+</button>
-              <button onclick="removeFromCart(${index})" class="text-red-500 ml-2 text-sm"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          `;
-          list.appendChild(row);
+      const files = Array.from(fileInput.files);
+      const imagePromises = files.map(file => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(file);
         });
-        document.getElementById('cartTotalAmt').innerText = `₹${total.toLocaleString('en-IN')}`;
+      });
+
+      Promise.all(imagePromises).then(base64Images => {
+        const newProduct = {
+          title: title,
+          price: price,
+          images: base64Images
+        };
+
+        products.push(newProduct);
+        localStorage.setItem('bbd_products', JSON.stringify(products));
+
+        // Reset form
+        document.getElementById('clothTitle').value = '';
+        fileInput.value = '';
+        closeUploadModal();
+        renderProducts();
+        alert("Product safalta-purvak upload ho gaya!");
+      });
+    }
+
+    // 6. Detailed Product Modal View & Slider Logic
+    let currentGallery = [];
+    let currentGalleryIndex = 0;
+
+    function openProductModal(index) {
+      const p = products[index];
+      currentGallery = p.images || [];
+      currentGalleryIndex = 0;
+
+      document.getElementById('detailTitle').innerText = p.title;
+      document.getElementById('detailPrice').innerText = '₹' + p.price;
+      
+      updateSliderView();
+      renderThumbnails();
+
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    function updateSliderView() {
+      const img = document.getElementById('detailMainImg');
+      if (currentGallery.length > 0) {
+        img.src = currentGallery[currentGalleryIndex];
       }
-
-      document.getElementById('cartModal').classList.remove('hidden');
+      // Update active thumbnail
+      const thumbs = document.querySelectorAll('.thumb-item');
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('active', i === currentGalleryIndex);
+      });
     }
 
-    function closeCartModal() {
-      document.getElementById('cartModal').classList.add('hidden');
+    function slidePrev() {
+      if (currentGallery.length <= 1) return;
+      currentGalleryIndex = (currentGalleryIndex - 1 + currentGallery.length) % currentGallery.length;
+      updateSliderView();
     }
 
-    function changeQty(index, change) {
-      cart[index].qty += change;
-      if (cart[index].qty <= 0) {
-        cart.splice(index, 1);
-      }
-      saveCart();
-      openCartModal();
+    function slideNext() {
+      if (currentGallery.length <= 1) return;
+      currentGalleryIndex = (currentGalleryIndex + 1) % currentGallery.length;
+      updateSliderView();
     }
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      saveCart();
-      openCartModal();
+    function renderThumbnails() {
+      const thumbBox = document.getElementById('thumbContainer');
+      thumbBox.innerHTML = '';
+      currentGallery.forEach((imgSrc, i) => {
+        const thumb = document.createElement('img');
+        thumb.src = imgSrc;
+        thumb.className = `thumb-item ${i === 0 ? 'active' : ''}`;
+        thumb.onclick = () => {
+          currentGalleryIndex = i;
+          updateSliderView();
+        };
+        thumbBox.appendChild(thumb);
+      });
     }
 
-    function checkoutCart() {
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-      closeCartModal();
-      // Use first item as specimen for checkout demo
-      openBuyModal(cart[0].id);
-    }
+    // Size Pills toggle
+    document.querySelectorAll('.size-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
 
-    // ADMIN PANEL OPERATIONS
-    function openAdminModal() {
-      document.getElementById('adminModal').classList.remove('hidden');
-    }
-
-    function closeAdminModal() {
-      document.getElementById('adminModal').classList.add('hidden');
-      document.getElementById('adminProductForm').reset();
-    }
-
-    function handleProductUpload(e) {
-      e.preventDefault();
-
-      const title = document.getElementById('admTitle').value.trim();
-      const category = document.getElementById('admCategory').value;
-      const mrp = parseFloat(document.getElementById('admMrp').value);
-      const price = parseFloat(document.getElementById('admPrice').value);
-      const description = document.getElementById('admDesc').value.trim();
-      let image = document.getElementById('admImage').value.trim();
-
-      if (!image) {
-        image = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60";
-      }
-
-      // AUTOMATIC FAKE RATING ENGINE
-      const fakeMetrics = generateFakeRating();
-
-      const newProduct = {
-        id: Date.now(),
-        title: title,
-        category: category,
-        mrp: mrp,
-        price: price,
-        image: image,
-        description: description,
-        rating: fakeMetrics.rating,
-        reviewsCount: fakeMetrics.reviewsCount
-      };
-
-      products.unshift(newProduct);
-      saveProducts();
-      renderProducts();
-      closeAdminModal();
-
-      alert(`Success! "${title}" has been uploaded with automated rating ${fakeMetrics.rating} ★ (${fakeMetrics.reviewsCount} reviews).`);
-    }
-
-    // INITIAL EXECUTION
+    // Initial Render
     renderProducts();
-    updateCartBadge();
   </script>
 </body>
-          </html>
+</html>
